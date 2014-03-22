@@ -14,6 +14,12 @@
     overflow:hidden;
     background: #F0F8FF;
 }
+/*#container {*/
+/*border:1px solid #000;*/
+/*border-radius: 5px;*/
+/*overflow:hidden;*/
+/*background: #F0F8FF;*/
+/*}*/
 .hidden {
     display: none;
 }
@@ -36,4 +42,11 @@ div.tooltip {
 .equator {
     stroke: #ccc;
     stroke-width: 1px;
+}
+/*slider*/
+#slider .slider-selection {
+    background: #BABABA;
+}
+.slider-container{
+    margin:10px 10%
 }

@@ -3,13 +3,35 @@
 <title>D3 World Map Template | TechSlides</title>
 <head>
 <link  rel="stylesheet" type="text/css" href="css/map.css">
+<!--jquery-->
+<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+<!-- Bootstrap 3 -->
+<link  rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link  rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!--slider-->
+<link  rel="stylesheet" type="text/css" href="css/bootstrap-slider.css">
+<script type="text/javascript" src="js/bootstrap-slider.js"></script>
 </head>
 <body>
-
-  <h1>World Map Indicators D3.js</h1>
-
-  <div id="container"></div>
-
+  <br><br>
+  <div>
+      <div class="row">
+          <div  id="container" ></div>
+      </div>
+      <div class="row">
+          <div class="slider-container">
+              <input id="slider" data-slider-id='slider'
+                     type="text" data-slider-min="1980"
+                     data-slider-max="2013"
+                     data-slider-step="1"
+                     data-slider-value="2010"
+                     data-slider-tooltip="hide"
+                      />
+              <span>Years [1980, 2013]: <span id="sliderVal">2010</span></span>
+          </div>
+      </div>
+  </div>
 <script src="js/d3.min.js"></script>
 <script src="js/topojson.v1.min.js"></script>
 <script src="js/map.js"></script>

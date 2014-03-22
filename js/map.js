@@ -1,10 +1,22 @@
+//Globals
 var year = "2010";
 var dataFile = "data/ag.lnd.agri.zs_Indicator_en_csv_v2.csv";
 var countryIndices = {};
+
+//load csv file
 d3.csv(dataFile, function(err, countryIndex) {
     countryIndex.forEach(function(row){
         countryIndices[row["Country Name"]] = row;
     });
+});
+//initialize slider
+$("#slider").slider();
+//change year
+$("#slider").on('slide', function(slideEvt) {
+    $("#sliderVal").text(slideEvt.value);
+    if(slideEvt.value[0]){
+        year = slideEvt.value[0].toString();
+    }
 });
 
 d3.select(window).on("resize", throttle);
@@ -20,7 +32,7 @@ var height = width / 2;
 var fillRange = d3.scale.linear()
     .domain([1, 88])
     .range(["steelblue", "brown"]);
-    //.range(["white", "red"]);
+    //.range(["white", "black"]);
 
 var topo,projection,path,svg,g;
 
