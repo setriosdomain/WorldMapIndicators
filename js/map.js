@@ -32,7 +32,7 @@
 
     var fillRange = d3.scale.linear()
         .domain([1, 88])
-        .range(["steelblue", "brown"]);
+        .range(["steelblue", "cyan"]);
     //.range(["white", "black"]);
 
     var topo,projection,path,svg,g;
@@ -123,13 +123,13 @@
 
 
         //EXAMPLE: adding some capitals from external CSV file
-        d3.csv("data/country-capitals.csv", function(err, capitals) {
-
-            capitals.forEach(function(i){
-                addpoint(i.CapitalLongitude, i.CapitalLatitude, i.CapitalName );
-            });
-
-        });
+//        d3.csv("data/country-capitals.csv", function(err, capitals) {
+//
+//            capitals.forEach(function(i){
+//                addpoint(i.CapitalLongitude, i.CapitalLatitude, i.CapitalName );
+//            });
+//
+//        });
 
     }
 
@@ -188,28 +188,28 @@
 
 
 //function to add points and text to the map (used in plotting capitals)
-    function addpoint(lat,lon,text) {
-
-        var gpoint = g.append("g").attr("class", "gpoint");
-        var x = projection([lat,lon])[0];
-        var y = projection([lat,lon])[1];
-
-        gpoint.append("svg:circle")
-            .attr("cx", x)
-            .attr("cy", y)
-            .attr("class","point")
-            .attr("r", 1.5);
-
-        //conditional in case a point has no associated text
-        if(text.length>0){
-
-            gpoint.append("text")
-                .attr("x", x+2)
-                .attr("y", y+2)
-                .attr("class","text")
-                .text(text);
-        }
-
-    }
+//    function addpoint(lat,lon,text) {
+//
+//        var gpoint = g.append("g").attr("class", "gpoint");
+//        var x = projection([lat,lon])[0];
+//        var y = projection([lat,lon])[1];
+//
+//        gpoint.append("svg:circle")
+//            .attr("cx", x)
+//            .attr("cy", y)
+//            .attr("class","point")
+//            .attr("r", 1.5);
+//
+//        //conditional in case a point has no associated text
+//        if(text.length>0){
+//
+//            gpoint.append("text")
+//                .attr("x", x+2)
+//                .attr("y", y+2)
+//                .attr("class","text")
+//                .text(text);
+//        }
+//
+//    }
 
 }());
