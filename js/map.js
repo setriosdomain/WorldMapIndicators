@@ -3,6 +3,7 @@
     var year = "2010";
     var dataFile = "data/ag.lnd.agri.zs_Indicator_en_csv_v2.csv";
     var countryIndices = {};
+    var evtScale, evtTrans;
 
 //load csv file
     d3.csv(dataFile, function(err, countryIndex) {
@@ -17,6 +18,7 @@
         $("#sliderVal").text(slideEvt.value);
         if(slideEvt.value[0]){
             year = slideEvt.value[0].toString();
+            redraw();
         }
     });
 
@@ -61,16 +63,19 @@
 
     }
 
+
     d3.json("data/world-topo-min.json", function(error, world) {
 
         var countries = topojson.feature(world, world.objects.countries).features;
-        var  neighbors = topojson.neighbors(world.objects.countries.geometries);
+        //var neighbors = topojson.neighbors(world.objects.countries.geometries);
 
         topo = countries;
-        draw(topo, neighbors);
+        //draw(topo, neighbors);
+        draw(topo);
 
     });
 
+    //function draw(countries, neighbors) {
     function draw(countries, neighbors) {
 
         svg.append("path")
@@ -140,32 +145,36 @@
         d3.select('svg').remove();
         setup(width,height);
         draw(topo);
+        move();//zoom: scale,translate to this right position.
     }
 
 
     function move() {
 
-        var t = d3.event.translate;
-        var s = d3.event.scale;
-        zscale = s;
+        if(d3.event) {
+            evtTrans = d3.event.translate;
+            evtScale = d3.event.scale;
+        }
+
+        //zscale = evtScale;
         var h = height/4;
 
 
-        t[0] = Math.min(
-            (width/height)  * (s - 1),
-            Math.max( width * (1 - s), t[0] )
+        evtTrans[0] = Math.min(
+            (width/height)  * (evtScale - 1),
+            Math.max( width * (1 - evtScale), evtTrans[0] )
         );
 
-        t[1] = Math.min(
-            h * (s - 1) + h * s,
-            Math.max(height  * (1 - s) - h * s, t[1])
+        evtTrans[1] = Math.min(
+            h * (evtScale - 1) + h * evtScale,
+            Math.max(height  * (1 - evtScale) - h * evtScale, evtTrans[1])
         );
 
-        zoom.translate(t);
-        g.attr("transform", "translate(" + t + ")scale(" + s + ")");
+        zoom.translate(evtTrans);
+        g.attr("transform", "translate(" + evtTrans + ")scale(" + evtScale + ")");
 
         //adjust the country hover stroke width based on zoom level
-        d3.selectAll(".country").style("stroke-width", 1.5 / s);
+        d3.selectAll(".country").style("stroke-width", 1.5 / evtScale);
 
     }
 
