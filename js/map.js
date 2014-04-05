@@ -118,7 +118,7 @@
                     var index = parseFloat(ctry[year]);
                     return fillRange(index);
                 }
-                return 0;
+                return d3.rgb("lightgrey");
             });
 
         //offsets for tooltips
@@ -131,9 +131,15 @@
 
                 var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); } );
 
+                var ctry = countryIndices[d.properties.name];
+                var indexStrValue = '';
+                if(ctry && (ctry[year] != "")) {
+                    indexStrValue = ': ' + ctry[year];
+                }
+
                 tooltip.classed("hidden", false)
                     .attr("style", "left:"+(mouse[0]+offsetL)+"px;top:"+(mouse[1]+offsetT)+"px")
-                    .html(d.properties.name);
+                    .html(d.properties.name + indexStrValue);
 
             })
             .on("mouseout",  function(d,i) {
