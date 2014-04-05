@@ -1,15 +1,34 @@
 (function(){
-    //local variables.
     var year = "2010";
-    var dataFile = "data/ag.lnd.agri.zs_Indicator_en_csv_v2.csv";
+    //var dataFile = "data/ag.lnd.agri.zs_Indicator_en_csv_v2.csv";
+    var dataFile = "data/SP.URB.TOTL.IN.ZS_Indicator_en_csv_v2.csv";
     var countryIndices = {};
     var evtScale, evtTrans;
+    var fillRange;
 
-//load csv file
+    //load csv file
     d3.csv(dataFile, function(err, countryIndex) {
+
+        var minScale,maxScale, minYear = 1960, maxYear = 2012,ix;
+
         countryIndex.forEach(function(row){
             countryIndices[row["Country Name"]] = row;
+
+            for(ix=minYear;ix<maxYear;ix++){
+                var newVal = parseFloat(row[ix.toString()]);
+                if(isNaN(newVal)){continue;}
+                if(!minScale) {
+                    minScale = newVal;
+                    maxScale = minScale;
+                }
+                minScale = Math.min(minScale, newVal);
+                maxScale = Math.max(maxScale, newVal);
+            }
         });
+
+        fillRange = d3.scale.linear()
+            .domain([minScale,maxScale])
+            .range(["cyan", "steelblue"]);
     });
 //initialize slider
     $("#slider").slider();
@@ -31,11 +50,6 @@
 
     var width = document.getElementById('container').offsetWidth;
     var height = width / 2;
-
-    var fillRange = d3.scale.linear()
-        .domain([1, 88])
-        .range(["steelblue", "cyan"]);
-    //.range(["white", "black"]);
 
     var topo,projection,path,svg,g;
 
@@ -125,19 +139,7 @@
             .on("mouseout",  function(d,i) {
                 tooltip.classed("hidden", true);
             });
-
-
-        //EXAMPLE: adding some capitals from external CSV file
-//        d3.csv("data/country-capitals.csv", function(err, capitals) {
-//
-//            capitals.forEach(function(i){
-//                addpoint(i.CapitalLongitude, i.CapitalLatitude, i.CapitalName );
-//            });
-//
-//        });
-
     }
-
 
     function redraw() {
         width = document.getElementById('container').offsetWidth;
@@ -148,17 +150,15 @@
         move();//zoom: scale,translate to this right position.
     }
 
-
     function move() {
 
         if(d3.event) {
             evtTrans = d3.event.translate;
             evtScale = d3.event.scale;
         }
+        if(!evtTrans){return;}
 
-        //zscale = evtScale;
         var h = height/4;
-
 
         evtTrans[0] = Math.min(
             (width/height)  * (evtScale - 1),
@@ -178,8 +178,6 @@
 
     }
 
-
-
     var throttleTimer;
     function throttle() {
         window.clearTimeout(throttleTimer);
@@ -188,27 +186,22 @@
         }, 200);
     }
 
-
-//geo translation on mouse click in map
+    //geo translation on mouse click in map
     function click() {
         var latlon = projection.invert(d3.mouse(this));
         console.log(latlon);
     }
 
-
 //function to add points and text to the map (used in plotting capitals)
 //    function addpoint(lat,lon,text) {
-//
 //        var gpoint = g.append("g").attr("class", "gpoint");
 //        var x = projection([lat,lon])[0];
 //        var y = projection([lat,lon])[1];
-//
 //        gpoint.append("svg:circle")
 //            .attr("cx", x)
 //            .attr("cy", y)
 //            .attr("class","point")
 //            .attr("r", 1.5);
-//
 //        //conditional in case a point has no associated text
 //        if(text.length>0){
 //
