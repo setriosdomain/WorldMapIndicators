@@ -7,30 +7,50 @@
     var fillRange;
 
     //load csv file
-    d3.csv(dataFile, function(err, countryIndex) {
+    var loadData = function(redrawAfterLoading) {
+        d3.csv(dataFile, function (err, countryIndex) {
 
-        var minScale,maxScale, minYear = 1960, maxYear = 2012,ix;
+            var minScale, maxScale, minYear = 1960, maxYear = 2012, ix;
 
-        countryIndex.forEach(function(row){
-            countryIndices[row["Country Name"]] = row;
+            countryIndex.forEach(function (row) {
+                countryIndices[row["Country Name"]] = row;
 
-            for(ix=minYear;ix<maxYear;ix++){
-                var newVal = parseFloat(row[ix.toString()]);
-                if(isNaN(newVal)){continue;}
-                if(!minScale) {
-                    minScale = newVal;
-                    maxScale = minScale;
+                for (ix = minYear; ix < maxYear; ix++) {
+                    var newVal = parseFloat(row[ix.toString()]);
+                    if (isNaN(newVal)) {
+                        continue;
+                    }
+                    if (!minScale) {
+                        minScale = newVal;
+                        maxScale = minScale;
+                    }
+                    minScale = Math.min(minScale, newVal);
+                    maxScale = Math.max(maxScale, newVal);
                 }
-                minScale = Math.min(minScale, newVal);
-                maxScale = Math.max(maxScale, newVal);
+            });
+
+            fillRange = d3.scale.linear()
+                .domain([minScale, maxScale])
+                .range(["cyan", "steelblue"]);
+            if(redrawAfterLoading){
+                redraw();
             }
         });
+    };
+    loadData(false);
+    //upon data selection change -reload the data.
+    $("#urbpop, #agrlnd").change(function () {
+        if ($(this).val() === "urbpop") {
+            dataFile = "data/SP.URB.TOTL.IN.ZS_Indicator_en_csv_v2.csv";
 
-        fillRange = d3.scale.linear()
-            .domain([minScale,maxScale])
-            .range(["cyan", "steelblue"]);
+        }else if ($(this).val() === "agrlnd") {
+            dataFile = "data/ag.lnd.agri.zs_Indicator_en_csv_v2.csv";
+        }else{
+            return;
+        }
+        loadData(true);
     });
-//initialize slider
+    //initialize slider
     $("#slider").slider();
 //change year
     $("#slider").on('slide', function(slideEvt) {
