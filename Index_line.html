@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>D3 Line Graph</title>
+<head>
+<!--jquery-->
+<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+<!-- Bootstrap 3 -->
+<link  rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link  rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<style>
+body {
+  font: 10px sans-serif;
+  margin: 0;
+}
+
+path.line {
+  fill: none;
+  stroke: #666;
+  stroke-width: 1.5px;
+}
+
+path.area {
+  fill: #e7e7e7;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.x.axis line {
+  stroke: #fff;
+}
+
+.x.axis .minor {
+  stroke-opacity: .5;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.y.axis line, .y.axis path {
+  fill: none;
+  stroke: #000;
+}
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.focus circle {
+  fill: none;
+  stroke: steelblue;
+}
+</style>
+</head>
+<body>
+  Notes:
+  <ul>
+    <li>The Country for the graph is currently hardcoded in the JavaScript.</li>
+    <li>Tutorials used:
+      <ul>
+        <li><a href="http://bl.ocks.org/mbostock/3883245" target="_blank">http://bl.ocks.org/mbostock/3883245</a> - Generic line graph</li>
+        <li><a href="http://bl.ocks.org/mbostock/3902569" target="_blank">http://bl.ocks.org/mbostock/3902569</a> - For the mouseover circle</li>
+      </ul>
+    </li>
+    <li>TODO:
+      <ul>
+        <li>Integrate with map on click (call the "draw" function with the correct country)</li>
+        <li>Style cleanup (position number above the circle on hover etc.)</li>
+      </ul>
+    </li>
+  </ul>
+
+  <script src="js/d3.min.js"></script>
+  <script src="js/topojson.v1.min.js"></script>
+  <script src="js/line.js"></script>
+</body>
+</html>
