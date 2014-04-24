@@ -8,6 +8,7 @@
 <!-- Bootstrap 3 -->
 <link  rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link  rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+<link  rel="stylesheet" type="text/css" href="css/chart.css">
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <!--slider-->
 <link  rel="stylesheet" type="text/css" href="css/bootstrap-slider.css">
@@ -24,9 +25,10 @@
               <div class="col-md-3">
                   <input id="agrlnd" value="agrlnd" type="radio" name="dataSets" />&nbsp Agricultural land
               </div>
-              <!--<div class="col-md-3">-->
-                  <!--<input type="radio" name="dataSets"/>&nbsp Education-->
-              <!--</div>-->
+              <!--Health expenditure (% of GDP)-->
+              <div class="col-md-3">
+                  <input id="health" value="health" type="radio" name="dataSets" />&nbsp Health expenditure
+              </div>
               <!--<div class="col-md-3">-->
                   <!--<input type="radio" name="dataSets" />&nbsp BirthRate-->
               <!--</div>-->
@@ -51,5 +53,41 @@
 <script src="js/d3.min.js"></script>
 <script src="js/topojson.v1.min.js"></script>
 <script src="js/map.js"></script>
+
+<!--start modal-->
+  <!-- Modal -->
+  <div class="modal modal-lg fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title" id="myModalLabel"></h4>
+              </div>
+              <div class="modal-body">
+                  <div id="countryChart">
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!--<ul>-->
+      <!--<li>The Country for the graph is currently hardcoded in the JavaScript.</li>-->
+      <!--<li>Tutorials used:-->
+          <!--<ul>-->
+              <!--<li><a href="http://bl.ocks.org/mbostock/3883245" target="_blank">http://bl.ocks.org/mbostock/3883245</a> - Generic line graph</li>-->
+              <!--<li><a href="http://bl.ocks.org/mbostock/3902569" target="_blank">http://bl.ocks.org/mbostock/3902569</a> - For the mouseover circle</li>-->
+          <!--</ul>-->
+      <!--</li>-->
+      <!--<li>TODO:-->
+          <!--<ul>-->
+              <!--<li>Integrate with map on click (call the "draw" function with the correct country)</li>-->
+              <!--<li>Style cleanup (position number above the circle on hover etc.)</li>-->
+          <!--</ul>-->
+      <!--</li>-->
+  <!--</ul>-->
+<!--end modal-->
 </body>
 </html>
