@@ -392,6 +392,11 @@ function drawChart(countryName){
     draw(countryName);
 
     $('#myModal').modal('show');
+    $('#myModal').on( 'keydown', function(event) {
+        if(event.which == 13){
+            $('#myModal').modal('hide');
+        }
+    });
 
 
 

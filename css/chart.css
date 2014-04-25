@@ -43,3 +43,10 @@ path.area {
     fill: none;
     stroke: steelblue;
 }
+body.modal-open, .modal-open , .modal-open {
+    margin-right: 0;
+}
+
+.modal {
+    overflow-y: auto;
+}
