@@ -2,77 +2,74 @@
 <meta charset="utf-8">
 <title>D3 World Map Template | TechSlides</title>
 <head>
-<link  rel="stylesheet" type="text/css" href="css/map.css">
-<!--jquery-->
-<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
-<!-- Bootstrap 3 -->
-<link  rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link  rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
-<link  rel="stylesheet" type="text/css" href="css/chart.css">
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<!--slider-->
-<link  rel="stylesheet" type="text/css" href="css/bootstrap-slider.css">
-<script type="text/javascript" src="js/bootstrap-slider.js"></script>
+    <link  rel="stylesheet" type="text/css" href="css/map.css">
+    <!--jquery-->
+    <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+    <!-- Bootstrap 3 -->
+    <link  rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link  rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+    <link  rel="stylesheet" type="text/css" href="css/chart.css">
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!--slider-->
+    <link  rel="stylesheet" type="text/css" href="css/bootstrap-slider.css">
+    <script type="text/javascript" src="js/bootstrap-slider.js"></script>
 </head>
-<body>
-  <h4 id="title">World bank indicators</h4>
-  <div>
-      <div class="row">
-          <div id="dataSets">
-              <div class="col-md-3">
-                  <input id="urbpop" value="urbpop" type="radio" checked="true" name="dataSets"/>&nbsp Urban population
-              </div>
-              <div class="col-md-3">
-                  <input id="agrlnd" value="agrlnd" type="radio" name="dataSets" />&nbsp Agricultural land
-              </div>
-              <!--Health expenditure (% of GDP)-->
-              <div class="col-md-3">
-                  <input id="health" value="health" type="radio" name="dataSets" />&nbsp Health expenditure
-              </div>
-              <!--<div class="col-md-3">-->
-                  <!--<input type="radio" name="dataSets" />&nbsp BirthRate-->
-              <!--</div>-->
-          </div>
-      </div>
-      <div class="row">
-          <div id="container" ></div>
-      </div>
-      <div class="row">
-          <div class="slider-container">
-              <input id="slider" data-slider-id='slider'
-                     type="text" data-slider-min="1960"
-                     data-slider-max="2012"
-                     data-slider-step="1"
-                     data-slider-value="2010"
-                     data-slider-tooltip="hide"
-                      />
-              <span>Years [1960, 2012]: <span id="sliderVal">2010</span></span>
-          </div>
-      </div>
-  </div>
+<body id="bodi">
+<h4 id="title">World bank indicators</h4>
+<div>
+    <div class="row">
+        <div id="dataSets">
+            <div class="col-md-3">
+                <input id="urbpop" value="urbpop" type="radio" checked="true" name="dataSets"/>&nbsp Urban population
+            </div>
+            <div class="col-md-3">
+                <input id="agrlnd" value="agrlnd" type="radio" name="dataSets" />&nbsp Agricultural land
+            </div>
+            <!--Health expenditure (% of GDP)-->
+            <div class="col-md-3">
+                <input id="health" value="health" type="radio" name="dataSets" />&nbsp Health expenditure
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="container" ></div>
+    </div>
+    <div class="row">
+        <div class="slider-container">
+            <input id="slider" data-slider-id='slider'
+                   type="text" data-slider-min="1960"
+                   data-slider-max="2012"
+                   data-slider-step="1"
+                   data-slider-value="2010"
+                   data-slider-tooltip="hide"
+                    />
+            <span>Years [1960, 2012]: <span id="sliderVal">2010</span></span>
+        </div>
+    </div>
+</div>
 <script src="js/d3.min.js"></script>
 <script src="js/topojson.v1.min.js"></script>
 <script src="js/map.js"></script>
 
 <!--start modal-->
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h4 class="modal-title" id="myModalLabel"></h4>
-              </div>
-              <div class="modal-body">
-                  <div id="countryChart">
-                  </div>
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-              </div>
-          </div>
-      </div>
-  </div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body">
+                <div id="countryChart">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!--end modal-->
 </body>
 </html>
