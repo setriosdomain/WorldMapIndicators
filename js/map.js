@@ -378,7 +378,7 @@
                     d1 = values[i],
                     d = x0 - d0.year > d1.year - x0 ? d1 : d0;
                 focus.attr("transform", "translate(" + x(d.year) + "," + y(d.value) + ")"); // Position the circle
-                focus.select("text").text(d.year + ': ' + formatValue(d.value)); // Add some text next to the circle
+                focus.select("text").text(d.year + ': ' + formatValue(d.value)).attr("x",-30).attr("y",-15); // Add some text next to the circle
             }
 
         }
