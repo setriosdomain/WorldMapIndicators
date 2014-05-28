@@ -9,6 +9,7 @@
     var round = function(num){return Math.ceil(num * 100)/100;};
     var startColor = "lightblue";
     var endColor = "darkblue";
+    var indicatorName = "Urban population";
 
     //load csv file
     var loadData = function(redrawAfterLoading) {
@@ -47,10 +48,13 @@
     $("#urbpop, #agrlnd, #health").change(function () {
         if ($(this).val() === "urbpop") {
             dataFile = "data/SP.URB.TOTL.IN.ZS_Indicator_en_csv_v2.csv";
+            indicatorName = "Urban population";
         }else if ($(this).val() === "agrlnd") {
             dataFile = "data/ag.lnd.agri.zs_Indicator_en_csv_v2.csv";
+            indicatorName = "Agricultural land";
         }else if ($(this).val() === "health") {
             dataFile = "data/sh.xpd.totl.zs_Indicator_en_csv_v2.csv";
+            indicatorName = "Health expenditure";
         }else{
             return;
         }
@@ -226,7 +230,9 @@
         //console.log(latlon);
         if(mouseHoverOverCountry) {
             //drawChart("Germany");
-            drawChart(mouseHoverOverCountry.properties.name)
+            var countryName = mouseHoverOverCountry.properties.name;
+            drawChart(countryName, indicatorName + ": " +
+                countryName)
         }
     }
     function getFontSize(min,max){
@@ -234,7 +240,7 @@
         return Math.min(Math.max((mapHeight * 0.05), min),max) + "px";
     }
     //__chart code
-    function drawChart(countryName){
+    function drawChart(countryName, title){
 
         var mapWidth = Math.max( document.getElementById('container').offsetWidth*0.9, 200);
         mapWidth = Math.min(mapWidth, 605);
@@ -242,7 +248,7 @@
         var marginFac = mapWidth * 0.12;
         var fontSize = getFontSize(6,11);
 
-        $("#myModalLabel").text(countryName);
+        $("#myModalLabel").text(title);
         $("#countryChart" ).empty();
         var margin = {top: marginFac, right: marginFac,
                       bottom: marginFac, left: marginFac},
