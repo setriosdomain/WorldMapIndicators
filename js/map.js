@@ -49,12 +49,18 @@
         if ($(this).val() === "urbpop") {
             dataFile = "data/SP.URB.TOTL.IN.ZS_Indicator_en_csv_v2.csv";
             indicatorName = "Urban population";
+            startColor = "lightblue";
+            endColor = "darkblue";
         }else if ($(this).val() === "agrlnd") {
             dataFile = "data/ag.lnd.agri.zs_Indicator_en_csv_v2.csv";
             indicatorName = "Agricultural land";
+            startColor = "lightgreen";
+            endColor = "darkgreen";
         }else if ($(this).val() === "health") {
             dataFile = "data/sh.xpd.totl.zs_Indicator_en_csv_v2.csv";
             indicatorName = "Health expenditure";
+            startColor = "palegoldenrod";
+            endColor = "darkgoldenrod";
         }else{
             return;
         }
