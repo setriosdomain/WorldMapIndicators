@@ -7,6 +7,8 @@
     var mouseHoverOverCountry;
     var minScale, maxScale, maxHeight = 500;
     var round = function(num){return Math.ceil(num * 100)/100;};
+    var startColor = "lightblue";
+    var endColor = "darkblue";
 
     //load csv file
     var loadData = function(redrawAfterLoading) {
@@ -34,7 +36,7 @@
 
             fillRange = d3.scale.linear()
                 .domain([minScale, maxScale])
-                .range(["cyan", "steelblue"]);
+                .range([startColor, endColor]);
             if(redrawAfterLoading){
                 redraw();
             }
@@ -415,7 +417,7 @@
 
         var color = d3.scale.linear()
             .domain([minScale, maxScale])
-            .range(["cyan", "steelblue"]);
+            .range([startColor, endColor]);
 
         var legend = svg.selectAll("g.legend")
             .data(scaleValues)
