@@ -334,11 +334,13 @@
                 .attr("d", line(values));
 
             // Add a small label for the symbol name.
+            /*
             svg.append("text")
                 .attr("x", width - 6)
                 .attr("y", height - 6)
                 .style("text-anchor", "end")
                 .text(country);
+            */
 
             //// Hover over
             var focus = svg.append("g")
